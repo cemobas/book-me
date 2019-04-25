@@ -2,6 +2,16 @@ import React from 'react'
 
 class Booking extends React.Component {
 
+	state = {
+		tip: false
+	}
+	
+	toggleTip = () => {
+		this.setState(prevState => ({
+			tip: !prevState.tip
+		}))
+	}
+	
 	calculateTip = (cash) => {
 		if(cash < 50)
 			return cash * 0.05
@@ -29,7 +39,8 @@ class Booking extends React.Component {
 					<p>Cash: {cash}</p>
 				</div>
 				<div>
-					<p>Tip: {this.calculateTip(cash)}</p>
+					<button onClick={this.toggleTip}>{this.state.tip ? "Cancel tip" : "Add tip" }</button>
+					<p>Tip: {this.state.tip ? this.calculateTip(cash) : "no tip" }</p>
 				</div>
 			</section>
 		)
