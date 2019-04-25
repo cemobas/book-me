@@ -10,7 +10,7 @@ class Booking extends React.Component {
 	}
 
 	render() {
-		const { unit, people, from, to, cash } = this.props
+		const { unit="3", people, from, to, cash } = this.props
 		return (
 			<section>
 				<div>
