@@ -45,6 +45,14 @@ class Booking extends React.Component {
 		gender: "M",
 		tip: false
 	}
+
+	/* Lifecycle methods are essentially escape hatches. If you are not doing anything special, you can create full applications without them. They are very handy for analyzing what is going on in the application and for further optimizing the performance of React updates. */
+	componentWillUpdate() {
+		console.log('React computes the new rendered output and compares it with the last rendered output.')
+	}
+	componentDidUpdate() {
+		console.log('If there is a difference, React takes that difference to the browser and update process happens.')
+	}
 	
 	toggleTip = () => {
 		this.setState(prevState => ({
