@@ -1,17 +1,32 @@
 import React from 'react'
 
 const NameDisplay = ({name, gender}) => (
-	<div>
-		Greetings {gender === 'M' ? "Mr. " : "Ms. "} {name}
-	</div>
+	<span>
+		{gender === 'M' ? "Mr. " : "Ms. "} {name}
+	</span>
 )
 
 const Koniec = ({name, gender, text}) => (
 	/* Try to delete <div>, it won't work. */
 	<div>
-		{text}
+		{text}<br/>
 		{/* You can even use a React element inside JSX, because that too is an expression. Remember, a React element is just a function call. If no gender is blank, no greeting statement will be displayed. (Try erasing M in gender.) */}
-		{ gender && <NameDisplay name={name} gender={gender}/> }
+		Greetings { gender && <NameDisplay name={name} gender={gender}/> }
+	</div>
+)
+
+const Guests = ({guestList}) => (
+	<div>
+		<u>Guests:</u><br/>
+			{
+				guestList.map((guest, i) =>  {
+					return (
+						<span key={i}>
+							{i+1}. <NameDisplay name={guest.name} gender={guest.gender} /><br/>
+						</span>
+					)
+				})
+			}
 	</div>
 )
 
@@ -43,6 +58,9 @@ class Booking extends React.Component {
 			<section>
 				<div>
 					<p>Table No: {unit}</p>
+				</div>
+				<div>
+					<Guests guestList={[{"name": "Ewa", "gender": "F"}, {"name": "Cem", "gender": "M"}]} />
 				</div>
 				<div>
 					<p>People: {people}</p>
