@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const NameDisplay = ({name, gender}) => (
 	<span>
@@ -41,8 +42,6 @@ class Booking extends React.Component {
 	}
 
 	state = {
-		name: "Cem",
-		gender: "M",
 		tip: false
 	}
 
@@ -68,7 +67,7 @@ class Booking extends React.Component {
 	}
 
 	render() {
-		const { unit="3", people, from, to, cash } = this.props
+		const { user, unit=3, people, from, to, cash } = this.props
 		return (
 			<section>
 				<div>
@@ -94,7 +93,7 @@ class Booking extends React.Component {
 					{/* This is equivalent to the ${} interpolation syntax in JavaScript template literals. This is the only constraint inside JSX: Only expressions. For example, you cannot use a regular if-statement, but a ternary expression is okay. JavaScript variables are also expressions. */}
 					<button onClick={this.toggleTip}>{this.state.tip ? "Cancel tip" : "Add tip" }</button>
 					<p>Tip: {this.state.tip ? this.calculateTip(cash) : "no tip" }</p>
-					<Koniec name={this.state.name} gender={this.state.gender} text="Your booking has been confirmed."/>
+					<Koniec name={user.name} gender={user.gender} text="Your booking has been confirmed."/>
 				</div>
 				<div style={ { fontSize: 10, color:'yellow', backgroundColor:'navy' } }>
 					Date: {this.date}
@@ -102,6 +101,15 @@ class Booking extends React.Component {
 			</section>
 		)
 	}
+}
+
+Booking.propTypes = {
+	user: PropTypes.object,
+	unit: PropTypes.number,
+	people: PropTypes.number,
+	from: PropTypes.number,
+	to: PropTypes.number,
+	cash: PropTypes.number
 }
 
 export default Booking
