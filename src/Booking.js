@@ -33,6 +33,13 @@ const Guests = ({guestList}) => (
 /* Every component gets a special instance property called props that holds all values passed to that component’s element when it was instantiated. Unlike function components, the render function in class-based components does not receive any arguments. */
 class Booking extends React.Component {
 
+	guestList = [{"name": "Ewa", "gender": "F"}, {"name": "Cem", "gender": "M"}];
+
+	constructor(props) {
+		super(props);
+		this.date = Date(Date.now());
+	}
+
 	state = {
 		name: "Cem",
 		gender: "M",
@@ -60,7 +67,7 @@ class Booking extends React.Component {
 					<p>Table No: {unit}</p>
 				</div>
 				<div>
-					<Guests guestList={[{"name": "Ewa", "gender": "F"}, {"name": "Cem", "gender": "M"}]} />
+					<Guests guestList={this.guestList} />
 				</div>
 				<div>
 					<p>People: {people}</p>
@@ -72,7 +79,7 @@ class Booking extends React.Component {
 					<p>To: {to}:00</p>
 				</div>
 				{ /* Sometimes we use a JavaScript object inside curly brackets to pass a CSS style object to the special style attribute in React. */}
-				<div style={ { color:'yellow', backgroundColor:'navy' } }>
+				<div>
 					<p>Cash: {cash}</p>
 				</div>
 				<div>
@@ -80,6 +87,9 @@ class Booking extends React.Component {
 					<button onClick={this.toggleTip}>{this.state.tip ? "Cancel tip" : "Add tip" }</button>
 					<p>Tip: {this.state.tip ? this.calculateTip(cash) : "no tip" }</p>
 					<Koniec name={this.state.name} gender={this.state.gender} text="Your booking has been confirmed."/>
+				</div>
+				<div style={ { fontSize: 10, color:'yellow', backgroundColor:'navy' } }>
+					Date: {this.date}
 				</div>
 			</section>
 		)
