@@ -31,7 +31,7 @@ const Guests = ({guestList}) => (
 	</div>
 )
 
-/* Every component gets a special instance property called props that holds all values passed to that component’s element when it was instantiated. Unlike function components, the render function in class-based components does not receive any arguments. */
+/* Every component gets a special instance property called props that holds all values passed to that component’s element when it was instantiated. Unlike function components, the render function in class-based components does not receive any arguments. Also function components don't have state, but class components do. */
 class Booking extends React.Component {
 
 	guestList = [{"name": "Ewa", "gender": "F"}, {"name": "Cem", "gender": "M"}];
@@ -41,6 +41,9 @@ class Booking extends React.Component {
 		this.date = Date(Date.now());
 	}
 
+	/** This is no different than setting state in the constructor.
+	 * State is what DOM watches the changes on. Here tip value updates the front-end with a switch.
+	 */
 	state = {
 		tip: false
 	}
@@ -52,6 +55,14 @@ class Booking extends React.Component {
 	componentDidUpdate() {
 		console.log('If there is a difference, React takes that difference to the browser and update process happens.')
 	}
+
+	/** Using third party plugins, we may need to watch the mount/unmounting of our components (in the DOM) on the browser.*/
+	componentDidMount() {
+		console.log('Component is mounted.');
+	}
+	componentWillUnmount() {
+		console.log('Component is unmounted.');
+	}
 	
 	toggleTip = () => {
 		this.setState(prevState => ({
@@ -60,10 +71,13 @@ class Booking extends React.Component {
 	}
 	
 	calculateTip = (cash) => {
-		if(cash < 50)
-			return cash * 0.05
-		else
-			return cash * 0.1
+		if(cash < 50) {
+			this.date = Date(Date.now());
+			return cash * 0.05;
+		} else {
+			this.date = Date(Date.now());
+			return cash * 0.1;
+		}
 	}
 
 	render() {

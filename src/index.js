@@ -7,3 +7,11 @@ render(
 	<Booking user={{"name": "Cem", "gender": "M"}} people={2} from={20} to={22} cash={300} />, 
 	document.getElementById('root')
 )
+
+/** This helps us watch componentDidUnmount in action. */
+// setTimeout(() => {
+// 	render(
+// 		<h2>...</h2>, 
+// 		document.getElementById('root')
+// 	);
+// }, 4000);
